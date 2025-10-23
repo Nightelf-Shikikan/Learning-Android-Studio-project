@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/FirstFragment">
+
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.myapplication2.FirstFragment"
+        android:label="FirstFragment">
+
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.myapplication2.SecondFragment"
+        android:label="SecondFragment">
+        <argument
+            android:name="message"
+            app:argType="string"
+            android:defaultValue="No message" />
+
+    </fragment>
+
+
+</navigation>
