@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="Background image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wallpaper_n" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_main" />
+
+
+
+    <Button
+        android:id="@+id/btnOpenSecond"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:text="View Nayuta Banner"
+        android:textSize="20sp"
+        style="@style/MyButtonStyle"
+        android:layout_gravity="center"
+        android:layout_marginTop="-100dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
