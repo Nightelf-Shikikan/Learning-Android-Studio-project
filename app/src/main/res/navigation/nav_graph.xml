@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Home screen -->
+
+    <!-- Details screen -->
+
+    <!-- Settings screen -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.myapplication2.SettingsFragment"
+        android:label="Settings" />
+</navigation>
