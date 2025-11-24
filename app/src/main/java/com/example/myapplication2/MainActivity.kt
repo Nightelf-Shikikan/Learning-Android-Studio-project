@@ -1,76 +1,104 @@
 package com.example.myapplication2
 
+import android.widget.Toast
+import android.view.View
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Button
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.example.myapplication2.databinding.ActivityMainBinding
-import android.widget.Button
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DiffUtil
 
-class DynamicViewPagerAdapter(
-    fa: FragmentActivity,
-    private val fragments: MutableList<Fragment> = mutableListOf(),
-    private val titles: MutableList<String> = mutableListOf()
-) : FragmentStateAdapter(fa) {
 
-    override fun getItemCount(): Int = fragments.size
+class MyAdapter(
+    private var items: List<MyItem>,
+    private val onButtonClick: (MyItem) -> Unit
+) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
-    override fun createFragment(position: Int): Fragment = fragments[position]
-
-    // Optional helper function to add fragments dynamically
-    fun addFragment(fragment: Fragment, title: String) {
-        fragments.add(fragment)
-        titles.add(title)
-        notifyItemInserted(fragments.size - 1)
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val image = view.findViewById<ImageView>(R.id.itemImage)
+        val name = view.findViewById<TextView>(R.id.itemName)
+        val description = view.findViewById<TextView>(R.id.itemDescription)
+        val button = view.findViewById<Button>(R.id.itemButton)
     }
 
-    fun getTitle(position: Int): String = titles[position]
+    fun updateList(newItems: List<MyItem>) {
+        val diff = DiffUtil.calculateDiff(MyDiffUtilCallback(items, newItems))
+        items = newItems
+        diff.dispatchUpdatesTo(this)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_row, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = items[position]
+
+        holder.image.setImageResource(item.imageRes)
+        holder.name.text = item.name
+        holder.description.text = item.description
+
+        holder.button.setOnClickListener {
+            onButtonClick(item)
+        }
+    }
+
+    override fun getItemCount() = items.size
+
 }
+
+data class MyItem(
+    val name: String,
+    val description: String,
+    val imageRes: Int
+)
+
 
 // ---------------- MainActivity -----------------
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewPager: ViewPager2
-    private lateinit var tabLayout: TabLayout
-    private lateinit var adapter: DynamicViewPagerAdapter
-    private lateinit var tabLayoutMediator: TabLayoutMediator
+
+    var items = listOf(
+        MyItem("Apple", "A tasty fruit", R.drawable.apple),
+        MyItem("Banana", "Yellow friend", R.drawable.apple),
+        MyItem("Cherry", "Small but powerful", R.drawable.apple)
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager = findViewById(R.id.viewPager)
-        tabLayout = findViewById(R.id.tabLayout)
 
-        // Initialize adapter with starting fragments
-        adapter = DynamicViewPagerAdapter(this)
-        adapter.addFragment(HomeFragment(), "Home")
-        adapter.addFragment(DetailsFragment(), "Details")
-        adapter.addFragment(SettingsFragment(), "Settings")
-
-        viewPager.adapter = adapter
-        // Attach tabs to ViewPager2
-        tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = adapter.getTitle(position)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = MyAdapter(items) { item ->
+            Toast.makeText(this, "Clicked: ${item.name}", Toast.LENGTH_SHORT).show()
         }
-        tabLayoutMediator.attach()
+        val adapter = MyAdapter(items) { item ->
+            Toast.makeText(this, "Clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+        }
+        recyclerView.adapter = adapter
 
-        // Example button to add fragment at runtime
-        val button = findViewById<Button>(R.id.btnAddFragment)
-        button.setOnClickListener {
-            adapter.addFragment(NewFragment(), "New")
+        val updateButton = findViewById<Button>(R.id.updateButton)
 
-            // Re-attach mediator to show new tab
-            tabLayoutMediator.detach()
-            tabLayoutMediator.attach()
+        updateButton.setOnClickListener {
+            val newList = items.toMutableList()
+            newList[1] = MyItem("Orange", "Fresh fruit!", R.drawable.apple) // replace Banana
+            adapter.updateList(newList)
+            items = newList          // Save new list
         }
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
