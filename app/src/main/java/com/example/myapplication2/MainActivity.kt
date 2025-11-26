@@ -1,11 +1,7 @@
 package com.example.myapplication2
 
 import android.widget.Toast
-import android.view.View
-import android.view.ViewGroup
-import android.view.LayoutInflater
-import android.widget.ImageView
-import android.widget.TextView
+
 import android.widget.Button
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,93 +9,63 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.ViewModelProvider
 
+import android.widget.EditText
 
-class MyAdapter(
-    private var items: List<MyItem>,
-    private val onButtonClick: (MyItem) -> Unit
-) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image = view.findViewById<ImageView>(R.id.itemImage)
-        val name = view.findViewById<TextView>(R.id.itemName)
-        val description = view.findViewById<TextView>(R.id.itemDescription)
-        val button = view.findViewById<Button>(R.id.itemButton)
-    }
-
-    fun updateList(newItems: List<MyItem>) {
-        val diff = DiffUtil.calculateDiff(MyDiffUtilCallback(items, newItems))
-        items = newItems
-        diff.dispatchUpdatesTo(this)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_row, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = items[position]
-
-        holder.image.setImageResource(item.imageRes)
-        holder.name.text = item.name
-        holder.description.text = item.description
-
-        holder.button.setOnClickListener {
-            onButtonClick(item)
-        }
-    }
-
-    override fun getItemCount() = items.size
-
-}
-
-data class MyItem(
-    val name: String,
-    val description: String,
-    val imageRes: Int
-)
-
+import com.example.myapplication2.utils.getCurrentDate
 
 // ---------------- MainActivity -----------------
 class MainActivity : AppCompatActivity() {
-
-    var items = listOf(
-        MyItem("Apple", "A tasty fruit", R.drawable.apple),
-        MyItem("Banana", "Yellow friend", R.drawable.apple),
-        MyItem("Cherry", "Small but powerful", R.drawable.apple)
-    )
-
+    private lateinit var adapter: NotesAdapter
+    private lateinit var viewModel: NotesViewModel
+    val notes = NotesRepository.notes
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        // RecyclerView setup
+        adapter = NotesAdapter(emptyList())
+        val recyclerView = findViewById<RecyclerView>(R.id.notesRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MyAdapter(items) { item ->
-            Toast.makeText(this, "Clicked: ${item.name}", Toast.LENGTH_SHORT).show()
-        }
-        val adapter = MyAdapter(items) { item ->
-            Toast.makeText(this, "Clicked: ${item.name}", Toast.LENGTH_SHORT).show()
-        }
         recyclerView.adapter = adapter
 
-        val updateButton = findViewById<Button>(R.id.updateButton)
+        // ViewModel
+        viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
 
-        updateButton.setOnClickListener {
-            val newList = items.toMutableList()
-            newList[1] = MyItem("Orange", "Fresh fruit!", R.drawable.apple) // replace Banana
-            adapter.updateList(newList)
-            items = newList          // Save new list
+        // Observe notes
+        viewModel.notes.observe(this) { noteList ->
+            adapter.updateNotes(noteList)
+        }
+
+        val titleInput = findViewById<EditText>(R.id.titleInput)
+        val contentInput = findViewById<EditText>(R.id.contentInput)
+        val addButton = findViewById<Button>(R.id.addNoteButton)
+
+        addButton.setOnClickListener {
+            val title = titleInput.text.toString()
+            val content = contentInput.text.toString()
+
+            if (title.isNotEmpty() && content.isNotEmpty()) {
+                val newNote = Note(
+                    id = NotesRepository.notes.size + 1,
+                    title = title,
+                    content = content,
+                    date = getCurrentDate()
+                )
+
+
+                viewModel.addNote(newNote) // Add note via ViewModel
+
+                titleInput.text.clear()
+                contentInput.text.clear()
+            } else {
+                Toast.makeText(this, "Please enter title and content", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
-
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
