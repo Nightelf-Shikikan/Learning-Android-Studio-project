@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <!-- Background Image -->
@@ -26,28 +26,32 @@
         android:padding="2dp">
 
 
-        <EditText
-            android:id="@+id/etNewItem"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Enter Item" />
+            android:layout_marginTop="60dp"
+            android:text="Press Load"
+            android:textSize="18sp"
+            android:layout_gravity="center" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:visibility="gone"
+            android:layout_width="300dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"/>
 
         <Button
-            android:id="@+id/btnAdd"
-
-            android:layout_width="379dp"
+            android:id="@+id/btnLoad"
+            android:layout_width="244dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"
-            android:text="Add Item to list" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="424dp"
-            android:layout_weight="1"
-            android:padding="0dp" />
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:text="Load Data"
+            app:layout_constraintTop_toBottomOf="@id/progress" />
 
 
     </LinearLayout>
