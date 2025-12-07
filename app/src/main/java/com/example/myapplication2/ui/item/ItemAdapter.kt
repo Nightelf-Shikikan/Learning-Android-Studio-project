@@ -27,7 +27,7 @@ class ItemAdapter(
 
         fun bind(item: Item) {
             // Set text and checkbox
-            binding.tvContent.text = item.content
+            binding.item.text = item.content
             binding.checkbox.isChecked = item.checkbox
 
             // Toggle checkbox in database via ViewModel

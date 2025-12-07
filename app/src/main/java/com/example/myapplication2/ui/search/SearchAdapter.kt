@@ -20,7 +20,7 @@ class SearchAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val contentText: TextView = itemView.findViewById(R.id.tvContent)
+        private val contentText: TextView = itemView.findViewById(R.id.item)
 
         fun bind(item: Item) {
             contentText.text = item.content
