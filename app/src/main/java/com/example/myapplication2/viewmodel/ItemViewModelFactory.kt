@@ -1,7 +1,9 @@
-package com.example.myapplication2
+package com.example.myapplication2.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication2.data.repository.ItemRepository
+
 
 class ItemViewModelFactory(private val repository: ItemRepository) : ViewModelProvider.Factory {
 

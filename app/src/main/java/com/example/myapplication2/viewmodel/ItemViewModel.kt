@@ -1,10 +1,11 @@
-package com.example.myapplication2
+package com.example.myapplication2.viewmodel
 
-import androidx.lifecycle.*
-import kotlinx.coroutines.launch
-
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-
+import androidx.lifecycle.viewModelScope
+import com.example.myapplication2.data.model.Item
+import com.example.myapplication2.data.repository.ItemRepository
+import kotlinx.coroutines.launch
 
 class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
 
@@ -22,9 +23,12 @@ class ItemViewModel(private val repository: ItemRepository) : ViewModel() {
         }
     }
 
-    fun deleteItem(item: Item) {
+    fun delete(item: Item) {
         viewModelScope.launch {
             repository.delete(item)
         }
+    }
+    fun update(item: Item) = viewModelScope.launch {
+        repository.update(item)
     }
 }
