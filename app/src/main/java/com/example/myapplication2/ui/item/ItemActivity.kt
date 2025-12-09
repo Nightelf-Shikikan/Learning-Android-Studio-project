@@ -1,21 +1,18 @@
 package com.example.myapplication2.ui.item
 
 import android.os.Bundle
-import android.util.Log
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication2.data.database.AppDatabase
-import com.example.myapplication2.data.model.Item
+
 import com.example.myapplication2.viewmodel.ItemViewModel
 import com.example.myapplication2.viewmodel.ItemViewModelFactory
 import com.example.myapplication2.data.repository.ItemRepository
 import com.example.myapplication2.databinding.ActivityItemBinding
-import com.example.myapplication2.ui.search.SearchAdapter
-import com.example.myapplication2.ui.search.SearchViewModel
-import com.example.myapplication2.ui.search.SearchViewModelFactory
-import kotlinx.coroutines.launch
+
 
 class ItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityItemBinding
