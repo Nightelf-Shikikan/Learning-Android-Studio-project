@@ -34,19 +34,21 @@ class ApiViewModel(private val repository: ApiRepository): ViewModel() {
             }
         }
     }
+
     fun search(query: String) {
         viewModelScope.launch {
+            _loading.value = true
             try {
-                val response = repository.searchItems(query)
-                _items.value = response.docs // assuming OpenLibraryResponse has a 'docs' list
+                _items.value = repository.searchItems(query)
+                _error.value = null
             } catch (e: Exception) {
                 _error.value = e.message
+            } finally {
+                _loading.value = false
             }
         }
     }
 }
-
-
 
 
 

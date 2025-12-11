@@ -36,9 +36,7 @@ class ApiActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-        binding.btnFetchAll.setOnClickListener {
-            viewModel.loadItems()
-        }
+
 
         // Observe items
         lifecycleScope.launch {
@@ -66,11 +64,9 @@ class ApiActivity : AppCompatActivity() {
         }
 
 
-        // Button click → fetch all items
         binding.btnFetchAll.setOnClickListener {
-            viewModel.loadItems()
+            viewModel.loadItems()  // this triggers the repository -> API -> updates StateFlow
         }
-
     }
 }
 
