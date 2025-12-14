@@ -13,7 +13,7 @@ class ApiAdapter(private var items: List<ApiItem> = listOf()) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameText: TextView = itemView.findViewById(android.R.id.text1)
         fun bind(item: ApiItem) {
-            nameText.text = item.name
+            nameText.text = item.title
         }
     }
 

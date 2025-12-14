@@ -1,6 +1,7 @@
 package com.example.myapplication2.ui.api
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -65,6 +66,7 @@ class ApiActivity : AppCompatActivity() {
 
 
         binding.btnFetchAll.setOnClickListener {
+            Log.d("API_CLICK", "Fetch button clicked")
             viewModel.loadItems()  // this triggers the repository -> API -> updates StateFlow
         }
     }

@@ -1,5 +1,6 @@
 package com.example.myapplication2.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication2.data.model.ApiItem
@@ -23,11 +24,15 @@ class ApiViewModel(private val repository: ApiRepository): ViewModel() {
 
     fun loadItems() {
         viewModelScope.launch {
+            Log.d("API_VM", "loadItems() started")
             _loading.value = true
             try {
-                _items.value = repository.fetchItems()
+                val result = repository.fetchItems()
+                Log.d("API_VM", "Items received: ${result.size}")
+                _items.value = result
                 _error.value = null
             } catch (e: Exception) {
+                Log.e("API_VM", "Error", e)
                 _error.value = e.message
             } finally {
                 _loading.value = false
@@ -35,19 +40,7 @@ class ApiViewModel(private val repository: ApiRepository): ViewModel() {
         }
     }
 
-    fun search(query: String) {
-        viewModelScope.launch {
-            _loading.value = true
-            try {
-                _items.value = repository.searchItems(query)
-                _error.value = null
-            } catch (e: Exception) {
-                _error.value = e.message
-            } finally {
-                _loading.value = false
-            }
-        }
-    }
+
 }
 
 

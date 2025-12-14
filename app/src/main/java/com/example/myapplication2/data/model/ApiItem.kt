@@ -6,7 +6,5 @@ data class OpenLibraryResponse(
 )
 
 data class ApiItem(
-    val id: Int,
-    val name: String,
-
+    val title: String
 )
