@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication2.databinding.ActivityMainBinding
+import com.example.myapplication2.ui.load.LoadActivity
 import com.example.myapplication2.ui.api.ApiActivity
 import com.example.myapplication2.ui.item.ItemActivity
 import com.example.myapplication2.ui.search.SearchActivity
@@ -35,6 +36,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ApiActivity::class.java)
             startActivity(intent)
         }
+
+        // Button to open LoadActivity
+        binding.buttonOpenLoad.setOnClickListener {
+            val intent = Intent(this, LoadActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
     }
 }

@@ -44,6 +44,12 @@
             android:layout_height="wrap_content"
             android:text="API" />
 
+        <Button
+            android:id="@+id/buttonOpenLoad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Load Data" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
