@@ -3,6 +3,7 @@ package com.example.myapplication2.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication2.ui.catalog.CatalogActivity
 import com.example.myapplication2.databinding.ActivityMainBinding
 import com.example.myapplication2.ui.load.LoadActivity
 import com.example.myapplication2.ui.api.ApiActivity
@@ -42,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoadActivity::class.java)
             startActivity(intent)
         }
-
+        // Button to open CatalogActivity
+        binding.buttonOpenCatalog.setOnClickListener {
+            val intent = Intent(this, CatalogActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

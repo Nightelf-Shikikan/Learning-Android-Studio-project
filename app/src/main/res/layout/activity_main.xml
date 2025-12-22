@@ -50,6 +50,12 @@
             android:layout_height="wrap_content"
             android:text="Load Data" />
 
+        <Button
+            android:id="@+id/buttonOpenCatalog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Catalog" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
