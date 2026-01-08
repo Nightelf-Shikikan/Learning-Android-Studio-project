@@ -4,12 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myapplication2.data.database.dao.ItemDao
-import com.example.myapplication2.data.model.Item
+import com.example.myapplication2.data.database.dao.CatalogDao
+import com.example.myapplication2.data.model.CatalogItemEntity
 
-@Database(entities = [Item::class], version = 1, exportSchema = false)
+@Database(
+    entities = [CatalogItemEntity::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun itemDao(): ItemDao
+
+    abstract fun catalogDao(): CatalogDao
 
     companion object {
         @Volatile
@@ -21,12 +26,12 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "items_database"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration() // ✅ allows clean rebuilds during dev
+                    .build()
                 INSTANCE = instance
                 instance
             }
         }
     }
-
-
 }

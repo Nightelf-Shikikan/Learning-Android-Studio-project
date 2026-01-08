@@ -46,7 +46,7 @@ class CatalogFragment : Fragment() {
             onAddToCartClicked = { /* optional */ },
             onDetailsClicked = { item -> openItemDetails(item) }
         )
-        binding.catalogRecyclerView.adapter = basketAdapter
+
 
 
         binding.catalogRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -54,17 +54,7 @@ class CatalogFragment : Fragment() {
 
         observeItems()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.items.collect { catalogItems ->
-                catalogAdapter.updateItems(catalogItems)
-            }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.basket.collect { basketItems ->
-                basketAdapter.updateItems(basketItems)
-            }
-        }
 
         return binding.root
     }
