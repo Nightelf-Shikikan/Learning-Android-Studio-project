@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication2.databinding.ActivityMainBinding
 import com.example.myapplication2.ui.load.LoadActivity
 import com.example.myapplication2.ui.api.ApiActivity
+import com.example.myapplication2.ui.customload.CustomLoadActivity
 import com.example.myapplication2.ui.item.ItemActivity
 import com.example.myapplication2.ui.search.SearchActivity
 
@@ -43,6 +44,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Button to open CustomLoadActivity
+        binding.buttonOpenCustomLoad.setOnClickListener {
+            val intent = Intent(this, CustomLoadActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

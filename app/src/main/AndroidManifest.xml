@@ -16,6 +16,9 @@
             android:name=".ui.item.ItemActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.customload.CustomLoadActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.load.LoadActivity"
             android:exported="false" />
         <activity

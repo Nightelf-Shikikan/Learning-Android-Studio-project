@@ -50,6 +50,13 @@
             android:layout_height="wrap_content"
             android:text="Load Data" />
 
+        <Button
+            android:id="@+id/buttonOpenCustomLoad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Custom Load View" />
+
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
