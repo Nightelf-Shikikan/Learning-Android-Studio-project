@@ -5,19 +5,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="Background"
         android:scaleType="centerCrop"
-        android:src="@drawable/wallpaper_7"
-        android:contentDescription="Background" />
+        android:src="@drawable/wallpaper_7" />
     <!-- Foreground content -->
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="24dp">
 
         <Button
@@ -26,18 +29,14 @@
             android:layout_height="wrap_content"
             android:text="Load" />
 
-        <com.example.myapplication2.ui.customload.LoadingView
-            android:id="@+id/loadingView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        <com.example.myapplication2.ui.customload.CircleLoadView
+            android:id="@+id/circleLoader"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:visibility="gone"
+            app:circleColor="@color/red" />
 
-        <TextView
-            android:id="@+id/textViewMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            android:textColor="@android:color/white" />
+
 
     </LinearLayout>
 

@@ -1,58 +1,75 @@
 package com.example.myapplication2.ui.customload
+
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.os.Bundle
+
 import android.view.View
+
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+
+
+import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
+
+
 import com.example.myapplication2.databinding.ActivityCustomLoadBinding
 
 import com.example.myapplication2.viewmodel.CustomLoadViewModel
+
 
 class CustomLoadActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCustomLoadBinding
     private val viewModel: CustomLoadViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityCustomLoadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.loadingView.show("Please wait...")
-
-        binding.loadingView.hide()
-
         observeViewModel()
         viewModel.loadData()
 
-        setupClicks()
-    }
 
-    private fun setupClicks() {
         binding.btnCustomLoad.setOnClickListener {
-            showLoading()
-            binding.loadingView.postDelayed({
-                hideLoading() // hide after 3 seconds
-            }, 3000)
+            binding.btnCustomLoad.visibility = View.INVISIBLE
+            binding.circleLoader.visibility = View.VISIBLE
+
+            binding.circleLoader.setCircleColor(Color.RED)
+            val colorAnimator = ValueAnimator.ofArgb(Color.RED, Color.GREEN)
+            colorAnimator.duration = 5000
+            colorAnimator.addUpdateListener {
+                binding.circleLoader.setCircleColor(it.animatedValue as Int)
+            }
+            colorAnimator.start()
+            val animator = ValueAnimator.ofFloat(0f, 1f)
+            animator.duration = 5000L
+            animator.addUpdateListener { animation ->
+                val progress = animation.animatedValue as Float
+                binding.circleLoader.setProgress(progress)
+            }
+            animator.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.circleLoader.visibility = View.GONE
+                    binding.btnCustomLoad.visibility = View.VISIBLE
+                }
+            })
+            animator.start()
         }
-    }
-    private fun showLoading() {
-        binding.loadingView.show("Loading, please wait...")
-        binding.btnCustomLoad.visibility = View.INVISIBLE
-        // Optional: hide after delay (simulation)
-        binding.loadingView.postDelayed({
-            binding.loadingView.hide()
-        }, 3000)
 
     }
-    private fun hideLoading() {
-        binding.btnCustomLoad.visibility = View.VISIBLE
-        binding.loadingView.hide()
-    }
+
+
 
     private fun observeViewModel() {
         viewModel.message.observe(this) { text ->
-            binding.textViewMessage.text = text
+
         }
     }
 }
