@@ -1,55 +1,51 @@
 package com.example.myapplication2.ui
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication2.databinding.ActivityMainBinding
-import com.example.myapplication2.ui.load.LoadActivity
-import com.example.myapplication2.ui.api.ApiActivity
-import com.example.myapplication2.ui.customload.CustomLoadActivity
-import com.example.myapplication2.ui.item.ItemActivity
-import com.example.myapplication2.ui.search.SearchActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.Button
+import com.example.myapplication2.MyApp
+import com.example.myapplication2.R
+import com.example.myapplication2.data.repository.ItemAdapter
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+    private lateinit var adapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Inject dependencies
+        (application as MyApp).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        // Button to open FirstActivity
-        binding.buttonOpenFirst.setOnClickListener {
-            val intent = Intent(this, ItemActivity::class.java)
-            startActivity(intent)
+        viewModel = ViewModelProvider(this, viewModelFactory)
+            .get(MainViewModel::class.java)
+
+        // Show basket immediately
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.basketContainer, BasketFragment())
+            .commit()
+
+        val catalogContainer = findViewById<View>(R.id.container)
+
+        val fetchButton = findViewById<Button>(R.id.buttonFetch)
+        fetchButton.setOnClickListener {
+            catalogContainer.visibility = View.VISIBLE
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, CatalogFragment())
+                .commit()
+            viewModel.fetchItems()
+            fetchButton.visibility = View.GONE
         }
-
-        // Button to open SecondActivity
-        binding.buttonOpenSecond.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Button to open ThirdActivity
-        binding.buttonOpenThird.setOnClickListener {
-            val intent = Intent(this, ApiActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Button to open LoadActivity
-        binding.buttonOpenLoad.setOnClickListener {
-            val intent = Intent(this, LoadActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Button to open CustomLoadActivity
-        binding.buttonOpenCustomLoad.setOnClickListener {
-            val intent = Intent(this, CustomLoadActivity::class.java)
-            startActivity(intent)
-        }
-
-
     }
 }

@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:layout_height="match_parent">
 
-
-    <!-- Background Image -->
+    <!-- Background -->
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/wallpaper_4"
-        android:contentDescription="Background" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Top spacing (status bar safe) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:id="@+id/topGuide"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="64dp"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="648dp"
-        android:layout_marginTop="300dp"
-        android:orientation="vertical"
-        android:padding="2dp">
+    <!-- Fetch button -->
+    <Button
+        android:id="@+id/buttonFetch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetch Items"
+        app:layout_constraintTop_toBottomOf="@id/topGuide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Catalog fragment (hidden at start) -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/buttonFetch"
+        app:layout_constraintBottom_toTopOf="@id/basketContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
-            android:id="@+id/buttonOpenFirst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Groceries List" />
+    <!-- Basket fragment (always visible) -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/basketContainer"
+        android:layout_width="0dp"
+        android:layout_height="320dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
-            android:id="@+id/buttonOpenSecond"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Search" />
-        <Button
-            android:id="@+id/buttonOpenThird"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="API" />
-
-        <Button
-            android:id="@+id/buttonOpenLoad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Load Data" />
-
-        <Button
-            android:id="@+id/buttonOpenCustomLoad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Custom Load View" />
-
-
-    </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

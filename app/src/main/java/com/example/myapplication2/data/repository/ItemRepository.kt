@@ -1,20 +1,24 @@
 package com.example.myapplication2.data.repository
 
+import androidx.lifecycle.LiveData
 import com.example.myapplication2.data.database.dao.ItemDao
+import com.example.myapplication2.data.model.BasketItem
 import com.example.myapplication2.data.model.Item
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class ItemRepository(private val dao: ItemDao) {
-
-    val allItems = dao.getAllItems() // Flow<List<Item>>
-
-    suspend fun insert(item: Item) = dao.insertItem(item)
-    suspend fun update(item: Item) = dao.updateItem(item)
-    suspend fun delete(item: Item) = dao.deleteItem(item)
-
-    // Return Flow<List<Item>>
-    fun searchItems(query: String): Flow<List<Item>> {
-        return dao.search(query)
-    }
+interface ItemRepository {
+    fun clearItems()
+    fun getCatalogItems(): LiveData<List<Item>>
+    fun getBasketItems(): LiveData<List<BasketItem>>
+    fun addToBasket(item: Item)
+    fun removeFromBasket(basketItem: BasketItem)
+    fun fetchItems()
 }
+
+
+

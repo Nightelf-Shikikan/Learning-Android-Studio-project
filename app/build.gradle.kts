@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -42,9 +44,16 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.material3)
     val room_version = "2.6.1"
 
+    implementation("com.google.dagger:dagger:2.50")
+    kapt ("com.google.dagger:dagger-compiler:2.50")
+    kapt ("androidx.room:room-compiler:2.5.2")
+
     implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-runtime:2.5.2")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
@@ -65,6 +74,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
 
 

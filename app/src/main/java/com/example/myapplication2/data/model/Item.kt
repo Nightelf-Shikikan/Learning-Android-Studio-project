@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Item(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val content: String,
-    val checkbox: Boolean
+    val checkbox: Boolean,
+    val inBasket: Boolean = false
 )
