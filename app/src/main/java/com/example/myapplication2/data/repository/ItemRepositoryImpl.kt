@@ -22,8 +22,9 @@ class ItemRepositoryImpl @Inject constructor(
     override fun getCatalogItems() =
         itemDao.getCatalogItems()
 
-    override fun getBasketItems(): LiveData<List<BasketItem>> =
-        basketDao.getBasketItems()
+    override fun getBasketItems(): LiveData<List<BasketItem>> {
+        return basketDao.getBasketItems()
+    }
 
     override fun fetchItems() {
         CoroutineScope(Dispatchers.IO).launch {

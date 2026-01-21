@@ -3,17 +3,17 @@ package com.example.myapplication2.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.myapplication2.R
-import com.example.myapplication2.data.repository.ItemAdapter
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication2.R
 import com.example.myapplication2.data.repository.BasketAdapter
+import com.example.myapplication2.data.model.BasketItem
 
 class BasketFragment : Fragment(R.layout.fragment_basket) {
 
-    private lateinit var adapter: ItemAdapter
-    private val viewModel: MainViewModel by activityViewModels() // shared ViewModel
+    private lateinit var adapter: BasketAdapter
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

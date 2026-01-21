@@ -16,7 +16,7 @@ class MainViewModel @Inject constructor(
 
 
     val catalogItems: LiveData<List<Item>> = repository.getCatalogItems()
-    val basketItems: LiveData<List<Item>> = repository.getBasketItems()
+    val basketItems: LiveData<List<BasketItem>> = repository.getBasketItems()
 
 
     private val _basketItems = MutableLiveData<List<Item>>(emptyList())
