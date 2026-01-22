@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication2.R
 import com.example.myapplication2.data.model.Item
 class ItemAdapter(
+
     private val buttonText: String,
     private val onButtonClicked: (Item) -> Unit,
+    private val onItemClicked: (Item) -> Unit
 
 ) : ListAdapter<Item, ItemAdapter.ViewHolder>(DIFF_CALLBACK) {
 
@@ -43,5 +45,8 @@ class ItemAdapter(
         holder.button.text = buttonText
         holder.button.setOnClickListener { onButtonClicked(item) }
 
+        holder.itemView.setOnClickListener {
+            onItemClicked(item)
+        }
     }
 }

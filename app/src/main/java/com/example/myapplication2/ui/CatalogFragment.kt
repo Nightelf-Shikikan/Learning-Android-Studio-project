@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.myapplication2.data.model.Item
 
 class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
@@ -22,10 +24,20 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ItemAdapter("Add") { item ->
-            viewModel.addToBasket(item)
-            Toast.makeText(requireContext(), "${item.content} added", Toast.LENGTH_SHORT).show()
-        }
+        adapter = ItemAdapter(
+            buttonText = "Add",
+            onButtonClicked = { item ->
+                viewModel.addToBasket(item)
+                Toast.makeText(
+                    requireContext(),
+                    "${item.content} added",
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onItemClicked = { item ->
+                showItemDescription(item)
+            }
+        )
 
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
@@ -37,4 +49,14 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
             adapter.submitList(items)
         }
     }
+    private fun showItemDescription(item: Item) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Item details")
+            .setMessage(item.content)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
 }
