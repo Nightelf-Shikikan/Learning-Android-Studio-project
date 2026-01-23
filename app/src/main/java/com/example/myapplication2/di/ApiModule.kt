@@ -11,14 +11,14 @@ object ApiModule {
     @Provides
     @Singleton
     @NewsApiClient
-    fun provideClientNews(): ApiClient {
+    fun provideNewsApiClient(): ApiClient {
         return ApiClient("https://api.first.com/")
     }
 
     @Provides
     @Singleton
     @WeatherApiClient
-    fun provideClientWeather(): ApiClient {
+    fun provideWeatherApiClient(): ApiClient {
         return ApiClient("https://api.second.com/")
     }
 }
