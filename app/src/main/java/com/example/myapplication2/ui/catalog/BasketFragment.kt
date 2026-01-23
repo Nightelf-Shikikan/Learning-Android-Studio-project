@@ -1,4 +1,4 @@
-package com.example.myapplication2.ui
+package com.example.myapplication2.ui.catalog
 
 import android.os.Bundle
 import android.view.View
@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication2.R
 import com.example.myapplication2.data.repository.BasketAdapter
-import com.example.myapplication2.data.model.BasketItem
+import com.example.myapplication2.viewmodel.CatalogViewModel
 
 class BasketFragment : Fragment(R.layout.fragment_basket) {
 
     private lateinit var adapter: BasketAdapter
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: CatalogViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

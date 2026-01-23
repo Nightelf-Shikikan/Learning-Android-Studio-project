@@ -1,5 +1,4 @@
-package com.example.myapplication2.ui
-
+package com.example.myapplication2.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication2.data.model.BasketItem
 import com.example.myapplication2.data.model.Item
 import com.example.myapplication2.data.repository.ItemRepository
-import com.example.myapplication2.data.repository.ItemRepositoryImpl
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
+class CatalogViewModel @Inject constructor(
     private val repository: ItemRepository
 ) : ViewModel() {
 
@@ -32,4 +30,3 @@ class MainViewModel @Inject constructor(
 
     fun removeFromBasket(item: BasketItem) = repository.removeFromBasket(item)
 }
-

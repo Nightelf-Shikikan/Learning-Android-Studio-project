@@ -1,0 +1,19 @@
+package com.example.myapplication2.data.api
+
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+class NewsApiClient {
+    private val BASE_URL = "https://api.example.com/"
+
+    val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    val apiService: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
+    }
+
+}

@@ -1,5 +1,6 @@
 package com.example.myapplication2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,42 +11,47 @@ import android.widget.Button
 import com.example.myapplication2.MyApp
 import com.example.myapplication2.R
 import com.example.myapplication2.data.repository.ItemAdapter
+import com.example.myapplication2.ui.api.ApiActivity
+import com.example.myapplication2.ui.catalog.CatalogActivity
+import com.example.myapplication2.ui.status.StatusActivity
+import com.example.myapplication2.ui.test1.Test1Activity
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: ItemAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Inject dependencies
-        (application as MyApp).appComponent.inject(this)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(MainViewModel::class.java)
 
-        // Show basket immediately
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.basketContainer, BasketFragment())
-            .commit()
-
-        val catalogContainer = findViewById<View>(R.id.container)
-
-        val fetchButton = findViewById<Button>(R.id.buttonFetch)
-        fetchButton.setOnClickListener {
-            catalogContainer.visibility = View.VISIBLE
-
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, CatalogFragment())
-                .commit()
-            viewModel.fetchItems()
-            fetchButton.visibility = View.GONE
+        findViewById<Button>(R.id.openCatalogButton).setOnClickListener {
+            startActivity(
+                Intent(this, CatalogActivity::class.java)
+            )
         }
+
+        findViewById<Button>(R.id.button_start_status).setOnClickListener {
+            startActivity(
+                Intent(this, StatusActivity::class.java)
+            )
+        }
+
+        findViewById<Button>(R.id.button_start_api).setOnClickListener {
+            startActivity(
+                Intent(this, ApiActivity::class.java)
+            )
+        }
+
+        val button = findViewById<Button>(R.id.button_start_second)
+        button.setOnClickListener {
+            // Create an Intent to start SecondActivity
+            val intent = Intent(this, Test1Activity::class.java)
+            // Start the activity
+            startActivity(intent)
+        }
+
+
     }
+
+
 }

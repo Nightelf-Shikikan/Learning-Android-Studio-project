@@ -1,24 +1,21 @@
-package com.example.myapplication2.ui
+package com.example.myapplication2.ui.catalog
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication2.MyApp
-import com.example.myapplication2.R
-import com.example.myapplication2.data.repository.ItemAdapter
-import javax.inject.Inject
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.Button
-import androidx.fragment.app.activityViewModels
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication2.R
 import com.example.myapplication2.data.model.Item
+import com.example.myapplication2.data.repository.ItemAdapter
+import com.example.myapplication2.viewmodel.CatalogViewModel
 
 class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: CatalogViewModel by activityViewModels()
     private lateinit var adapter: ItemAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

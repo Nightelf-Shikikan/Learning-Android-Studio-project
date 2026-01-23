@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,38 +24,46 @@
         android:layout_height="1dp"
         android:id="@+id/topGuide"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="64dp"/>
+        app:layout_constraintGuide_begin="84dp"/>
 
-    <!-- Fetch button -->
     <Button
-        android:id="@+id/buttonFetch"
+        android:id="@+id/openCatalogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fetch Items"
+        android:text="Open Catalog"
         app:layout_constraintTop_toBottomOf="@id/topGuide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Catalog fragment (hidden at start) -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/buttonFetch"
-        app:layout_constraintBottom_toTopOf="@id/basketContainer"
+    <Button
+        android:id="@+id/button_start_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="96dp"
+        android:text="Test1 Activity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/topGuide" />
 
-    <!-- Basket fragment (always visible) -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/basketContainer"
-        android:layout_width="0dp"
-        android:layout_height="320dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/button_start_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="192dp"
+        android:text="Status"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/topGuide" />
+
+    <Button
+        android:id="@+id/button_start_api"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="280dp"
+        android:text="Api Activity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topGuide" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

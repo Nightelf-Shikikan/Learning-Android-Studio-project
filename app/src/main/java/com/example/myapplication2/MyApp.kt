@@ -18,6 +18,7 @@ class MyApp : Application() {
 
         appComponent = DaggerAppComponent.builder()
             .application(this)
+            .context(this)
             .build()
 
         // Build Room database with destructive migration for development

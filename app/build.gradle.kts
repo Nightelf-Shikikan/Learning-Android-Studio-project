@@ -52,6 +52,7 @@ dependencies {
     kapt ("com.google.dagger:dagger-compiler:2.50")
     kapt ("androidx.room:room-compiler:2.5.2")
 
+
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-runtime:2.5.2")
     kapt("androidx.room:room-compiler:$room_version")

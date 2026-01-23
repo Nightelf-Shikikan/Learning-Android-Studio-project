@@ -15,7 +15,19 @@
         android:theme="@style/Theme.MyApplication2">
 
 
-
+        <!-- Catalog screen -->
+        <activity
+            android:name=".ui.catalog.CatalogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.test1.Test1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.status.StatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.api.ApiActivity"
+            android:exported="false" />
 
 
         <activity
