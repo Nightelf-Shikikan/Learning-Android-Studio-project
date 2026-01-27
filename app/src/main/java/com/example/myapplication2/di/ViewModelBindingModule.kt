@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication2.viewmodel.ApiViewModel
 import com.example.myapplication2.viewmodel.CatalogViewModel
 import com.example.myapplication2.viewmodel.Test1ViewModel
+import com.example.myapplication2.viewmodel.StatusViewModel
 import dagger.Binds
 import dagger.multibindings.IntoMap
 import dagger.Module
@@ -38,4 +39,10 @@ abstract class ViewModelBindingModule {
     abstract fun bindApiViewModel(
         viewModel: ApiViewModel
     ): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StatusViewModel::class)
+    abstract fun bindStatusViewModel(viewModel: StatusViewModel): ViewModel
 }

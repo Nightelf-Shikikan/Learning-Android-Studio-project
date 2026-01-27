@@ -1,5 +1,6 @@
 package com.example.myapplication2
 
+
 import android.app.Application
 import androidx.room.Room
 import com.example.myapplication2.data.database.AppDatabase
@@ -18,7 +19,7 @@ class MyApp : Application() {
 
         appComponent = DaggerAppComponent.builder()
             .application(this)
-            .context(this)
+
             .build()
 
         // Build Room database with destructive migration for development

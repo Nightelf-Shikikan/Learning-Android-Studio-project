@@ -16,14 +16,17 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        AppModule::class,
         RepositoryModule::class,
         ViewModelBindingModule::class,
         DatabaseModule::class,
-        ViewModelSetModule::class,
+
         ApiModule::class
 
     ]
 )
+
+
 
 
 interface AppComponent {
@@ -33,8 +36,7 @@ interface AppComponent {
         @BindsInstance
         fun application(app: Application): Builder
 
-        @BindsInstance
-        fun context(context: Context): Builder
+
 
         fun build(): AppComponent
     }
