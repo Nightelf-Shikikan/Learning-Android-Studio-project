@@ -2,6 +2,8 @@ package com.example.myapplication2
 
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import androidx.room.Room
 import com.example.myapplication2.data.database.AppDatabase
 import com.example.myapplication2.di.AppComponent
@@ -16,6 +18,7 @@ class MyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        createNotificationChannel()
 
         appComponent = DaggerAppComponent.builder()
             .application(this)
@@ -28,9 +31,23 @@ class MyApp : Application() {
             AppDatabase::class.java,
             "my_database"
         )
+
+
+
             .fallbackToDestructiveMigration() // this will wipe DB if schema changed
             .build()
+
+
     }
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            "download_channel",
+            "Download Service",
+            NotificationManager.IMPORTANCE_LOW
+        )
 
-
+        val manager = getSystemService(NotificationManager::class.java)
+        manager.createNotificationChannel(channel)
+    }
 }
+

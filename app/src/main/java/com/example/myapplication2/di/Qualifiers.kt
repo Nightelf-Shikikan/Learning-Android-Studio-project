@@ -9,3 +9,7 @@ annotation class NewsApiClient
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class WeatherApiClient
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ApplicationContext

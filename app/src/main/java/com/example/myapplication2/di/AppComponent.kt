@@ -7,6 +7,7 @@ import com.example.myapplication2.data.repository.RepositoryModule
 import com.example.myapplication2.ui.MainActivity
 import com.example.myapplication2.ui.api.ApiActivity
 import com.example.myapplication2.ui.catalog.CatalogActivity
+import com.example.myapplication2.ui.servicedownload.ServiceDownloadActivity
 import com.example.myapplication2.ui.status.StatusActivity
 import com.example.myapplication2.ui.test1.Test1Activity
 import dagger.BindsInstance
@@ -36,8 +37,6 @@ interface AppComponent {
         @BindsInstance
         fun application(app: Application): Builder
 
-
-
         fun build(): AppComponent
     }
 
@@ -51,4 +50,6 @@ interface AppComponent {
     fun inject(activity: StatusActivity)
 
     fun inject(activity: ApiActivity)
+
+    fun inject(activity: ServiceDownloadActivity)
 }

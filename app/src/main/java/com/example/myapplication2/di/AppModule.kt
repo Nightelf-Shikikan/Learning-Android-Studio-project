@@ -11,5 +11,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideContext(app: Application): Context = app
+    @ApplicationContext
+    fun provideAppContext(application: Application): Context = application.applicationContext
+
+    @Provides
+    @Singleton
+    fun providePlainContext(application: Application): Context = application.applicationContext
 }

@@ -8,19 +8,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
+import androidx.activity.viewModels
 import com.example.myapplication2.MyApp
 import com.example.myapplication2.R
 import com.example.myapplication2.data.repository.ItemAdapter
+import com.example.myapplication2.di.DaggerViewModelFactory
 import com.example.myapplication2.ui.api.ApiActivity
 import com.example.myapplication2.ui.catalog.CatalogActivity
+import com.example.myapplication2.ui.servicedownload.ServiceDownloadActivity
 import com.example.myapplication2.ui.status.StatusActivity
 import com.example.myapplication2.ui.test1.Test1Activity
 import javax.inject.Inject
+import com.example.myapplication2.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var viewModelFactory: DaggerViewModelFactory
+
+    private val viewModel: MainViewModel by viewModels { viewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApp).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_main)
 
 
@@ -42,6 +55,11 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+        findViewById<Button>(R.id.button_start_service_download).setOnClickListener {
+            startActivity(
+                Intent(this, ServiceDownloadActivity::class.java)
+            )
+        }
         val button = findViewById<Button>(R.id.button_start_second)
         button.setOnClickListener {
             // Create an Intent to start SecondActivity
@@ -49,9 +67,7 @@ class MainActivity : AppCompatActivity() {
             // Start the activity
             startActivity(intent)
         }
-
+        viewModel.startDailyDownload()
 
     }
-
-
 }

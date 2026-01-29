@@ -39,8 +39,8 @@
         android:id="@+id/button_start_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="64dp"
         android:text="Test1 Activity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topGuide" />
@@ -49,8 +49,8 @@
         android:id="@+id/button_start_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="128dp"
         android:text="Status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topGuide" />
@@ -59,9 +59,19 @@
         android:id="@+id/button_start_api"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="192dp"
         android:text="Api Activity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topGuide" />
+
+    <Button
+        android:id="@+id/button_start_service_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="256dp"
+        android:text="ServiceDownlaod"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topGuide" />
 
