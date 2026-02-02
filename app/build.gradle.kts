@@ -1,14 +1,15 @@
-
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     kotlin("kapt")
+
+
 }
 
 android {
     namespace = "com.example.myapplication2"
-    compileSdk =36
+    compileSdk = 36
 
 
     defaultConfig {
@@ -38,19 +39,28 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        compose = true
         viewBinding = true
     }
+
+
 }
 
 dependencies {
 
+    implementation("androidx.activity:activity-compose:1.8.2")
+
+    debugImplementation("androidx.compose.ui:ui-tooling")
+
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
     val room_version = "2.6.1"
 
     implementation("com.google.dagger:dagger:2.50")
-    kapt ("com.google.dagger:dagger-compiler:2.50")
-    kapt ("androidx.room:room-compiler:2.5.2")
+    kapt("com.google.dagger:dagger-compiler:2.50")
+    kapt("androidx.room:room-compiler:2.5.2")
 
 
     implementation("androidx.room:room-runtime:$room_version")
@@ -81,7 +91,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
-
 
 
 }

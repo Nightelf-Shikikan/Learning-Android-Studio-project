@@ -15,6 +15,7 @@ import com.example.myapplication2.data.repository.ItemAdapter
 import com.example.myapplication2.di.DaggerViewModelFactory
 import com.example.myapplication2.ui.api.ApiActivity
 import com.example.myapplication2.ui.catalog.CatalogActivity
+import com.example.myapplication2.ui.profile.ProfileActivity
 import com.example.myapplication2.ui.servicedownload.ServiceDownloadActivity
 import com.example.myapplication2.ui.status.StatusActivity
 import com.example.myapplication2.ui.test1.Test1Activity
@@ -58,6 +59,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button_start_service_download).setOnClickListener {
             startActivity(
                 Intent(this, ServiceDownloadActivity::class.java)
+            )
+        }
+
+        findViewById<Button>(R.id.button_start_profile).setOnClickListener {
+            startActivity(
+                Intent(this, ProfileActivity::class.java)
             )
         }
         val button = findViewById<Button>(R.id.button_start_second)
